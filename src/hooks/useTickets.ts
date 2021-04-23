@@ -6,7 +6,7 @@ import useRefresh from './useRefresh'
 import {
   getTotalRewards,
   getTotalClaim,
-  getMatchingRewardLength,
+  getWinTicketsAmount,
   getWinningNumbers,
   getTickets,
 } from '../utils/lotteryUtils'
@@ -100,8 +100,8 @@ export const useMatchingRewardLength = (numbers) => {
 
   useEffect(() => {
     const fetchBalance = async () => {
-      const matchedNumbaers = await getMatchingRewardLength(lotteryContract, numbers)
-      setMatchingNumbers(matchedNumbaers)
+      const matchedNumbers = await getWinTicketsAmount(lotteryContract, numbers)
+      setMatchingNumbers(matchedNumbers)
     }
 
     if (lotteryContract) {

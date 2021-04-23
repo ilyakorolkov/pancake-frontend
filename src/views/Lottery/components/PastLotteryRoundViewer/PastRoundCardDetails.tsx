@@ -27,15 +27,21 @@ const PastRoundCardDetails: React.FC<PastRoundCardDetailsProps> = ({ data }) => 
   const TranslateString = useI18n()
 
   const {
-    contractLink,
-    jackpotTicket,
-    lotteryDate,
     lotteryNumber,
+    lotteryDate,
     lotteryNumbers,
-    match1Ticket,
-    match2Ticket,
-    match3Ticket,
-    poolSize,
+    totalRewards,
+    burned,
+    contractLink,
+
+    ticketsMatch4,
+    ticketsMatch3,
+    ticketsMatch2,
+
+    potMatch4,
+    potMatch3,
+    potMatch2,
+
   } = data
 
   return (
@@ -44,19 +50,19 @@ const PastRoundCardDetails: React.FC<PastRoundCardDetailsProps> = ({ data }) => 
       <>
         <CardBody>
           <CardHeading>
-            <Timestamp timeValue={lotteryDate} />
+           {/* <Timestamp timeValue={lotteryDate} /> */}
             <Heading size="md" mb="24px">
               Round #{lotteryNumber}
             </Heading>
             <TopLotteryCardHeading
               valueToDisplay={`${lotteryNumbers[0]}, ${lotteryNumbers[1]}, ${lotteryNumbers[2]}, ${lotteryNumbers[3]}`}
-              Icon={TicketRound}
+              Icon="/images/SOUP-ticket.svg"
             >
               {TranslateString(999, 'Winning numbers')}
             </TopLotteryCardHeading>
             <LotteryCardHeading
-              valueToDisplay={TranslateString(999, `${poolSize.toLocaleString()} CAKE`)}
-              Icon={PancakeRoundIcon}
+              valueToDisplay={TranslateString(999, `${totalRewards.toLocaleString()} SOUP`)}
+              Icon="/images/SOUP-new.svg"
             >
               {TranslateString(999, 'Total prizes')}
             </LotteryCardHeading>
@@ -64,11 +70,14 @@ const PastRoundCardDetails: React.FC<PastRoundCardDetailsProps> = ({ data }) => 
         </CardBody>
         <CardFooter>
           <PrizeGrid
-            lotteryPrizeAmount={poolSize}
-            jackpotMatches={jackpotTicket}
-            oneTicketMatches={match1Ticket}
-            twoTicketMatches={match2Ticket}
-            threeTicketMatches={match3Ticket}
+            totalRewards={totalRewards}
+            ticketsMatch4={ticketsMatch4}
+            ticketsMatch3={ticketsMatch3}
+            ticketsMatch2={ticketsMatch2}
+            potMatch4={potMatch4}
+            potMatch3={potMatch3}
+            potMatch2={potMatch2}
+            burned={burned}
             pastDraw
           />
           <PastLotteryActions contractLink={contractLink} lotteryNumber={lotteryNumber} />

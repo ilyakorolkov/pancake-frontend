@@ -3,16 +3,22 @@ import styled from 'styled-components'
 import useI18n from 'hooks/useI18n'
 import { Heading, Text } from '@pancakeswap-libs/uikit'
 import { BigNumber } from 'bignumber.js'
-import { usePriceCakeBusd } from 'state/hooks'
+import { usePriceCakeBusd, usePriceTokenBusd } from 'state/hooks'
+import { LOTTERY_ALLOCATION} from 'config'
 import CardBusdValue from '../../Home/components/CardBusdValue'
+import tokens from '../../../config/constants/tokens'
+import { getAddressForChain } from '../../../utils/addressHelpers'
 
 export interface PrizeGridProps {
-  lotteryPrizeAmount?: number
+  totalRewards?: number
   pastDraw?: boolean
-  jackpotMatches?: number
-  oneTicketMatches?: number
-  twoTicketMatches?: number
-  threeTicketMatches?: number
+  burned?: number
+  ticketsMatch4?: number
+  ticketsMatch3?: number
+  ticketsMatch2?: number
+  potMatch4?: number
+  potMatch3?: number
+  potMatch2?: number
 }
 
 const Grid = styled.div<{ pastDraw?: boolean }>`
@@ -37,19 +43,23 @@ const PastDrawGridItem = styled(GridItem)`
   transform: translate(-40%, 0%);
 `
 
-const PrizeGrid: React.FC<PrizeGridProps> = ({
-  lotteryPrizeAmount = 0,
-  pastDraw = false,
-  jackpotMatches,
-  twoTicketMatches,
-  threeTicketMatches,
+const PrizeGrid: React.FC<PrizeGridProps> = ({ totalRewards = 0,
+                                               pastDraw = false,
+                                               burned,
+                                               ticketsMatch4,
+                                               ticketsMatch3,
+                                               ticketsMatch2,
+                                               potMatch4,
+                                               potMatch3,
+                                               potMatch2,
 }) => {
-  const fourMatchesAmount = +((lotteryPrizeAmount / 100) * 50).toFixed(0)
-  const threeMatchesAmount = +((lotteryPrizeAmount / 100) * 20).toFixed(0)
-  const twoMatchesAmount = +((lotteryPrizeAmount / 100) * 10).toFixed(0)
-  const burnAmount = +((lotteryPrizeAmount / 100) * 20).toFixed(0)
+  const fourMatchesAmount = +(pastDraw ? potMatch4 : (totalRewards / 100) * LOTTERY_ALLOCATION[0]).toFixed(2)
+  const threeMatchesAmount = +(pastDraw ? potMatch3 : (totalRewards / 100) * LOTTERY_ALLOCATION[1]).toFixed(2)
+  const twoMatchesAmount = +(pastDraw ? potMatch2 : (totalRewards / 100) * LOTTERY_ALLOCATION[2]).toFixed(2)
+  const burnAmount = +(pastDraw ? burned : (totalRewards / 100) * LOTTERY_ALLOCATION[4]).toFixed(2)
+  const carriedForward = totalRewards - burnAmount - twoMatchesAmount - threeMatchesAmount - fourMatchesAmount;
   const TranslateString = useI18n()
-  const cakeBusdPrice = usePriceCakeBusd()
+  const cakeBusdPrice = usePriceTokenBusd(getAddressForChain(tokens.soup.address, 56));
 
   const getCakeBusdValue = (amount: number) => {
     return new BigNumber(amount).multipliedBy(cakeBusdPrice).toNumber()
@@ -71,7 +81,7 @@ const PrizeGrid: React.FC<PrizeGridProps> = ({
       )}
       <GridItem>
         <RightAlignedText fontSize="14px" color="textSubtle">
-          {TranslateString(752, 'Prize Pot')}
+          {TranslateString(752, pastDraw ? 'Prize Given' : 'Prize Pot')}
         </RightAlignedText>
       </GridItem>
       {/* 4 matches row */}
@@ -80,7 +90,7 @@ const PrizeGrid: React.FC<PrizeGridProps> = ({
       </GridItem>
       {pastDraw && (
         <PastDrawGridItem>
-          <RightAlignedHeading size="md">{jackpotMatches}</RightAlignedHeading>
+          <RightAlignedHeading size="md">{ticketsMatch4}</RightAlignedHeading>
         </PastDrawGridItem>
       )}
       <GridItem>
@@ -95,7 +105,7 @@ const PrizeGrid: React.FC<PrizeGridProps> = ({
       </GridItem>
       {pastDraw && (
         <PastDrawGridItem>
-          <RightAlignedText bold>{threeTicketMatches}</RightAlignedText>
+          <RightAlignedText bold>{ticketsMatch3}</RightAlignedText>
         </PastDrawGridItem>
       )}
       <GridItem>
@@ -110,7 +120,7 @@ const PrizeGrid: React.FC<PrizeGridProps> = ({
       </GridItem>
       {pastDraw && (
         <PastDrawGridItem>
-          <RightAlignedText>{twoTicketMatches}</RightAlignedText>
+          <RightAlignedText>{ticketsMatch2}</RightAlignedText>
         </PastDrawGridItem>
       )}
       <GridItem>
@@ -119,20 +129,25 @@ const PrizeGrid: React.FC<PrizeGridProps> = ({
           {!pastDraw && !cakeBusdPrice.eq(0) && <CardBusdValue value={getCakeBusdValue(twoMatchesAmount)} />}
         </RightAlignedText>
       </GridItem>
-      {/* Burn row */}
+      {/* Burn row
       <GridItem marginBottom="0">
         <Text>{TranslateString(999, `${pastDraw ? 'Burned' : 'To burn'}`)}:</Text>
+      </GridItem> */}
+      <GridItem marginBottom="0">
+        <Text>
+          Carried to next round
+        </Text>
       </GridItem>
       {pastDraw ? (
         <>
           <GridItem marginBottom="0" />
           <GridItem marginBottom="0">
-            <RightAlignedText>{burnAmount.toLocaleString()}</RightAlignedText>
+            <RightAlignedText>{carriedForward.toLocaleString()}</RightAlignedText>
           </GridItem>
         </>
       ) : (
         <GridItem marginBottom="0">
-          <RightAlignedText>{burnAmount.toLocaleString()}</RightAlignedText>
+          <RightAlignedText>{carriedForward.toLocaleString()}</RightAlignedText>
         </GridItem>
       )}
     </Grid>

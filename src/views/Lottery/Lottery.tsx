@@ -10,6 +10,8 @@ import Hero from './components/Hero'
 import Divider from './components/Divider'
 import NextDrawPage from './NextDrawPage'
 import PastDrawsPage from './PastDrawsPage'
+import HowItWorksPage from './HowItWorksPage'
+import LotteryProgress from './components/LotteryProgress'
 
 const Wrapper = styled.div`
   position: relative;
@@ -17,6 +19,19 @@ const Wrapper = styled.div`
   align-items: center;
   justify-content: center;
   margin-bottom: 32px;
+`
+
+const LeftWrapper = styled.div`
+  flex: 1;
+  padding-right: 0;
+
+  ${({ theme }) => theme.mediaQueries.sm} {
+    padding-right: 24px;
+  }
+
+  ${({ theme }) => theme.mediaQueries.lg} {
+    padding-right: 32px;
+  }
 `
 
 const Lottery: React.FC = () => {
@@ -60,16 +75,20 @@ const Lottery: React.FC = () => {
       <Hero />
       <Page>
         <Wrapper>
-          <ButtonMenu activeIndex={activeIndex} onItemClick={handleClick} scale="sm" variant="subtle">
+        <LotteryProgress />
+        </Wrapper>
+        <Wrapper>
+          <ButtonMenu activeIndex={activeIndex} onItemClick={handleClick} scale="sm" variant="primary">
             <ButtonMenuItem>{TranslateString(716, 'Next draw')}</ButtonMenuItem>
             <ButtonMenuItem>{TranslateString(718, 'Past draws')}</ButtonMenuItem>
+            <ButtonMenuItem>{TranslateString(718, 'How it works')}</ButtonMenuItem>
           </ButtonMenu>
         </Wrapper>
-        <Divider />
         <PastLotteryDataContext.Provider
           value={{ historyError, historyData, mostRecentLotteryNumber, currentLotteryNumber }}
         >
-          {activeIndex === 0 ? <NextDrawPage /> : <PastDrawsPage />}
+          {/* eslint-disable-next-line no-nested-ternary */}
+          {activeIndex === 0 ? <NextDrawPage /> : (activeIndex === 1 ? <PastDrawsPage /> : <HowItWorksPage />)}
         </PastLotteryDataContext.Provider>
       </Page>
     </>

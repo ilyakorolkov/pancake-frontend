@@ -1,16 +1,18 @@
 import React, { useContext, useState } from 'react'
 import styled from 'styled-components'
 import { useWeb3React } from '@web3-react/core'
-import { Heading, Card, CardBody, CardFooter, Text, PancakeRoundIcon, Flex, Skeleton } from '@pancakeswap-libs/uikit'
+import { Card, CardBody, CardFooter, Flex, Heading, Image, Skeleton, Text } from '@pancakeswap-libs/uikit'
 import { getBalanceNumber } from 'utils/formatBalance'
 import useI18n from 'hooks/useI18n'
 import { useTotalRewards } from 'hooks/useTickets'
 import PastLotteryDataContext from 'contexts/PastLotteryDataContext'
 import ExpandableSectionButton from 'components/ExpandableSectionButton/ExpandableSectionButton'
 import { BigNumber } from 'bignumber.js'
-import { usePriceCakeBusd } from 'state/hooks'
+import { usePriceCakeBusd, usePriceTokenBusd } from 'state/hooks'
 import PrizeGrid from '../PrizeGrid'
 import CardBusdValue from '../../../Home/components/CardBusdValue'
+import { getAddressForChain } from '../../../../utils/addressHelpers'
+import tokens from '../../../../config/constants/tokens'
 
 const CardHeading = styled.div`
   position: relative;
@@ -32,10 +34,9 @@ const Left = styled.div`
 
 const IconWrapper = styled.div`
   margin-right: 16px;
-  svg {
-    width: 48px;
-    height: 48px;
-  }
+  width: 48px;
+  height: 48px;
+  
 `
 
 const PrizeCountWrapper = styled.div`
@@ -55,8 +56,8 @@ const TotalPrizesCard = () => {
   const TranslateString = useI18n()
   const { account } = useWeb3React()
   const [showFooter, setShowFooter] = useState(false)
-  const lotteryPrizeAmount = +getBalanceNumber(useTotalRewards()).toFixed(0)
-  const lotteryPrizeAmountBusd = new BigNumber(lotteryPrizeAmount).multipliedBy(usePriceCakeBusd()).toNumber()
+  const lotteryPrizeAmount = +getBalanceNumber(useTotalRewards()).toFixed(2)
+  const lotteryPrizeAmountBusd = new BigNumber(lotteryPrizeAmount).multipliedBy(usePriceTokenBusd(getAddressForChain(tokens.soup.address, 56))).toNumber()
   const lotteryPrizeWithCommaSeparators = lotteryPrizeAmount.toLocaleString()
   const { currentLotteryNumber } = useContext(PastLotteryDataContext)
 
@@ -76,13 +77,13 @@ const TotalPrizesCard = () => {
         <CardHeading>
           <Left>
             <IconWrapper>
-              <PancakeRoundIcon />
+              <Image src="/images/SOUP-new.svg" alt="Number 1" width={150} height={150} responsive />
             </IconWrapper>
             <PrizeCountWrapper>
               <Text fontSize="14px" color="textSubtle">
                 {TranslateString(722, 'Total Pot:')}
               </Text>
-              <Heading size="lg">{lotteryPrizeWithCommaSeparators} CAKE</Heading>
+              <Heading size="lg">{lotteryPrizeWithCommaSeparators} SOUP</Heading>
               {lotteryPrizeAmountBusd !== 0 && <CardBusdValue value={lotteryPrizeAmountBusd} />}
             </PrizeCountWrapper>
           </Left>
@@ -93,7 +94,7 @@ const TotalPrizesCard = () => {
       </CardBody>
       <ExpandingWrapper showFooter={showFooter}>
         <CardFooter>
-          <PrizeGrid lotteryPrizeAmount={lotteryPrizeAmount} />
+          <PrizeGrid totalRewards={lotteryPrizeAmount} />
         </CardFooter>
       </ExpandingWrapper>
     </Card>

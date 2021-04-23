@@ -18,7 +18,7 @@ import {
   getPointCenterIfoAddress,
   getClaimRefundAddress,
   getTradingCompetitionAddress,
-  getEasterNftAddress,
+  getEasterNftAddress, getRouterAddress,
 } from 'utils/addressHelpers'
 
 // ABI
@@ -40,6 +40,7 @@ import sousChefBnb from 'config/abi/sousChefBnb.json'
 import claimRefundAbi from 'config/abi/claimRefund.json'
 import tradingCompetitionAbi from 'config/abi/tradingCompetition.json'
 import easterNftAbi from 'config/abi/easterNft.json'
+import routerAbi from 'config/abi/router.json'
 
 const getContract = (abi: any, address: string, web3?: Web3) => {
   const _web3 = web3 ?? web3NoAccount
@@ -98,4 +99,7 @@ export const getTradingCompetitionContract = (web3?: Web3) => {
 }
 export const getEasterNftContract = (web3?: Web3) => {
   return getContract(easterNftAbi, getEasterNftAddress(), web3)
+}
+export const getRouterContract = (web3?: Web3) => {
+  return getContract(routerAbi, getRouterAddress(), web3)
 }

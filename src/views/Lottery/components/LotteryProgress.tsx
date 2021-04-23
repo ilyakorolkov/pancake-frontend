@@ -13,7 +13,7 @@ import {
 
 const ProgressWrapper = styled.div`
   display: block;
-  width: 100%;
+  width: 60%;
 `
 
 const TopTextWrapper = styled.div`
@@ -45,16 +45,16 @@ const LotteryProgress = () => {
     <ProgressWrapper>
       <Progress primaryStep={getLotteryDrawStep(currentMillis)} secondaryStep={getTicketSaleStep()} showProgressBunny />
       <TopTextWrapper>
-        <StyledPrimaryText fontSize="20px" bold color="contrast">
+        <StyledPrimaryText fontSize="20px" bold color="#57463f">
           {lotteryHasDrawn ? timeUntilTicketSale : timeUntilLotteryDraw}
         </StyledPrimaryText>
-        <Text fontSize="20px" bold color="invertedContrast">
+        <Text fontSize="20px" color="#57463f">
           {lotteryHasDrawn ? TranslateString(434, 'Until ticket sale') : TranslateString(492, 'Until lottery draw')}
         </Text>
       </TopTextWrapper>
       {lotteryHasDrawn && (
         <BottomTextWrapper>
-          <Text color="invertedContrast">
+          <Text color="#57463f60">
             {timeUntilLotteryDraw} {TranslateString(492, 'Until lottery draw')}
           </Text>
         </BottomTextWrapper>

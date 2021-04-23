@@ -166,6 +166,14 @@ export const getTotalRewards = async (lotteryContract) => {
   return lotteryContract.methods.getTotalRewards(issueIndex).call()
 }
 
+export const getTotalRewardsForRound = async (lotteryContract, issueIndex) => {
+  return lotteryContract.methods.getTotalRewards(issueIndex).call()
+}
+
+export const getBurnedForRound = async (lotteryContract, issueIndex) => {
+  return lotteryContract.methods.historyBurn(issueIndex).call()
+}
+
 export const getMax = async (lotteryContract) => {
   return lotteryContract.methods.maxNumber().call()
 }
@@ -179,15 +187,20 @@ export const getLotteryStatus = async (lotteryContract) => {
   return lotteryContract.methods.drawed().call()
 }
 
-export const getMatchingRewardLength = async (lotteryContract, matchNumber) => {
-  let issueIndex = await lotteryContract.methods.issueIndex().call()
+export const getWinTicketsAmount = async (lotteryContract, matchNumber) => {
+  const issueIndex = await lotteryContract.methods.issueIndex().call()
+  return getWinTicketsAmountForRound(lotteryContract, issueIndex, matchNumber)
+}
+
+export const getWinTicketsAmountForRound = async (lotteryContract, round, matchNumber) => {
+  let issueIndex = round;
   const drawed = await lotteryContract.methods.drawed().call()
   if (!drawed) {
     issueIndex -= 1
+    if(issueIndex < 0) issueIndex = 0;
   }
   try {
     const amount = await lotteryContract.methods.historyAmount(issueIndex, 5 - matchNumber).call()
-
     return new BigNumber(amount).div(new BigNumber(10).pow(18)).div(LOTTERY_TICKET_PRICE).toNumber()
   } catch (err) {
     console.error(err)
@@ -195,8 +208,28 @@ export const getMatchingRewardLength = async (lotteryContract, matchNumber) => {
   return 0
 }
 
+export const getPotMatchForRound = async (lotteryContract, round, matchNumber) => {
+  let issueIndex = round;
+  const drawed = await lotteryContract.methods.drawed().call()
+  if (!drawed) {
+    issueIndex -= 1
+    if(issueIndex < 0) issueIndex = 0;
+  }
+  try {
+    const amount = await lotteryContract.methods.historyAmount(issueIndex, 5 - matchNumber).call()
+    return (new BigNumber(amount).div(new BigNumber(10).pow(18)))
+  } catch (err) {
+    console.error(err)
+  }
+  return new BigNumber(0)
+}
+
 export const getWinningNumbers = async (lotteryContract) => {
   const issueIndex = await lotteryContract.methods.issueIndex().call()
+  return getWinningNumbersForRound(lotteryContract, issueIndex);
+}
+
+export const getWinningNumbersForRound = async (lotteryContract, issueIndex) => {
   const numbers = []
   const drawed = await lotteryContract.methods.drawed().call()
 

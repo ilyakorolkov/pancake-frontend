@@ -38,21 +38,20 @@ const getNextLotteryDrawTime = (currentMillis) => {
 // @ts-ignore
 const getNextTicketSaleTime = (currentMillis) => (parseInt(currentMillis / 3600000) + 1) * 3600000
 const hoursAndMinutesString = (hours, minutes) => `${parseInt(hours)}h, ${parseInt(minutes)}m`
+const hmsString = (hours, minutes, seconds) => `${parseInt(hours)}h ${parseInt(minutes)}m ${parseInt(seconds)}s`
 
 export const getTicketSaleTime = (currentMillis): string => {
   const nextTicketSaleTime = getNextTicketSaleTime(currentMillis)
   const msUntilNextTicketSale = nextTicketSaleTime - currentMillis
-  const { minutes } = getTimePeriods(msUntilNextTicketSale / 1000)
-  const { hours } = getTimePeriods(msUntilNextTicketSale / 1000)
-  return hoursAndMinutesString(hours, minutes)
+  const { seconds, minutes, hours } = getTimePeriods(msUntilNextTicketSale / 1000)
+  return hmsString(hours, minutes, seconds)
 }
 
 export const getLotteryDrawTime = (currentMillis): string => {
   const nextLotteryDrawTime = getNextLotteryDrawTime(currentMillis)
   const msUntilLotteryDraw = nextLotteryDrawTime - currentMillis
-  const { minutes } = getTimePeriods(msUntilLotteryDraw / 1000)
-  const { hours } = getTimePeriods(msUntilLotteryDraw / 1000)
-  return hoursAndMinutesString(hours, minutes)
+  const {seconds, minutes, hours } = getTimePeriods(msUntilLotteryDraw / 1000)
+  return hmsString(hours, minutes, seconds)
 }
 
 export const getTicketSaleStep = () => (1 / 12) * 100

@@ -2,13 +2,14 @@ import { useCallback } from 'react'
 import { useWeb3React } from '@web3-react/core'
 import { useAppDispatch } from 'state'
 import {
-  fetchFarmUserDataAsync,
+ // fetchFarmUserDataAsync,
   updateUserStakedBalance,
   updateUserBalance,
   updateUserPendingReward,
 } from 'state/actions'
 import { unstake, sousUnstake, sousEmergencyUnstake } from 'utils/callHelpers'
 import { useMasterchef, useSousChef } from './useContract'
+/*
 
 const useUnstake = (pid: number) => {
   const dispatch = useAppDispatch()
@@ -26,10 +27,11 @@ const useUnstake = (pid: number) => {
 
   return { onUnstake: handleUnstake }
 }
+*/
 
 const SYRUPIDS = [5, 6, 3, 1, 22, 23, 78]
 
-export const useSousUnstake = (sousId) => {
+/* export const useSousUnstake = (sousId) => {
   const dispatch = useAppDispatch()
   const { account } = useWeb3React()
   const masterChefContract = useMasterchef()
@@ -58,4 +60,4 @@ export const useSousUnstake = (sousId) => {
   return { onUnstake: handleUnstake }
 }
 
-export default useUnstake
+export default useUnstake */

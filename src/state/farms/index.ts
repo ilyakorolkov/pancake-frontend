@@ -1,14 +1,13 @@
 /* eslint-disable no-param-reassign */
 import { createSlice } from '@reduxjs/toolkit'
 import farmsConfig from 'config/constants/farms'
-import fetchFarms from './fetchFarms'
 import {
-  fetchFarmUserEarnings,
   fetchFarmUserAllowances,
-  fetchFarmUserTokenBalances,
+  fetchFarmUserEarnings,
   fetchFarmUserStakedBalances,
+  fetchFarmUserTokenBalances,
 } from './fetchFarmUser'
-import { FarmsState, Farm } from '../types'
+import { Farm, FarmsState } from '../types'
 
 const initialState: FarmsState = { data: [...farmsConfig] }
 
@@ -37,10 +36,10 @@ export const farmsSlice = createSlice({
 export const { setFarmsPublicData, setFarmUserData } = farmsSlice.actions
 
 // Thunks
-export const fetchFarmsPublicDataAsync = () => async (dispatch) => {
+/* export const fetchFarmsPublicDataAsync = () => async (dispatch) => {
   const farms = await fetchFarms()
   dispatch(setFarmsPublicData(farms))
-}
+} */
 export const fetchFarmUserDataAsync = (account) => async (dispatch) => {
   const userFarmAllowances = await fetchFarmUserAllowances(account)
   const userFarmTokenBalances = await fetchFarmUserTokenBalances(account)

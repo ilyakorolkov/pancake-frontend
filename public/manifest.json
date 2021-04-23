@@ -1,7 +1,7 @@
 {
-  "short_name": "PancakeSwap",
-  "name": "PancakeSwap",
-  "description": "Farm CAKE with Pancake LP Tokens",
+  "short_name": "Soup Lottery",
+  "name": "Soup Lottery",
+  "description": "Win in the lottery using SOUP",
   "icons": [
     {
       "src": "favicon.ico",

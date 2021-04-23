@@ -1,4 +1,4 @@
-import { useEffect, useMemo } from 'react'
+import { useEffect, useMemo, useState } from 'react'
 import BigNumber from 'bignumber.js'
 import { kebabCase } from 'lodash'
 import { useWeb3React } from '@web3-react/core'
@@ -6,12 +6,12 @@ import { Toast, toastTypes } from '@pancakeswap-libs/uikit'
 import { useSelector } from 'react-redux'
 import { useAppDispatch } from 'state'
 import { Team } from 'config/constants/types'
-import { getWeb3NoAccount } from 'utils/web3'
-import { getAddress } from 'utils/addressHelpers'
+import { getWeb3NoAccount, getWeb3NoAccountMainnet } from 'utils/web3'
+import { getAddress, getBusdAddress, getWbnbAddress } from 'utils/addressHelpers'
 import { getBalanceNumber } from 'utils/formatBalance'
 import useRefresh from 'hooks/useRefresh'
 import {
-  fetchFarmsPublicDataAsync,
+ // fetchFarmsPublicDataAsync,
   fetchPoolsPublicDataAsync,
   fetchPoolsUserDataAsync,
   push as pushToast,
@@ -24,12 +24,14 @@ import { fetchProfile } from './profile'
 import { fetchTeam, fetchTeams } from './teams'
 import { fetchAchievements } from './achievements'
 import { fetchPrices } from './prices'
+import useWeb3 from '../hooks/useWeb3'
+import { getRouterContract } from '../utils/contractHelpers'
 
 export const useFetchPublicData = () => {
   const dispatch = useAppDispatch()
   const { slowRefresh } = useRefresh()
   useEffect(() => {
-    dispatch(fetchFarmsPublicDataAsync())
+  //  dispatch(fetchFarmsPublicDataAsync())
     dispatch(fetchPoolsPublicDataAsync())
   }, [dispatch, slowRefresh])
 
@@ -221,6 +223,33 @@ export const usePriceCakeBusd = (): BigNumber => {
   const cakeBusdPrice = cakeBnbFarm.tokenPriceVsQuote ? bnbBusdPrice.times(cakeBnbFarm.tokenPriceVsQuote) : ZERO
 
   return cakeBusdPrice
+}
+
+export const usePriceTokenBusd = (token: string) => {
+  const [busdValue, setBusdValue] = useState(new BigNumber(0))
+  // const { fastRefresh } = useRefresh()
+
+  const web3 = getWeb3NoAccountMainnet();
+  const router = getRouterContract(web3);
+
+  const one = new BigNumber(1).multipliedBy(new BigNumber(10).pow(18));
+
+  useEffect(() => {
+    const fetchBusdValue = async () =>{
+      try{
+        const memoryResponse = await router.methods.getAmountsOut(one, [token, getWbnbAddress(), getBusdAddress()]).call();
+
+        setBusdValue(new BigNumber(memoryResponse[2]));
+      } catch (error){
+        console.log(error)
+      }
+    }
+    if(router){
+      fetchBusdValue()
+    }
+  },[router, token, one])
+
+  return new BigNumber(busdValue).div(new BigNumber(10).pow(18));
 }
 
 // Block

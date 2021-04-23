@@ -4,6 +4,8 @@ import { BaseLayout } from '@pancakeswap-libs/uikit'
 import PastLotteryRoundViewer from './components/PastLotteryRoundViewer'
 import PastDrawsHistoryCard from './components/PastDrawsHistory/PastDrawsHistoryCard'
 
+import HowItWorks from './components/HowItWorks'
+
 const Cards = styled(BaseLayout)`
   align-items: start;
   margin-bottom: 32px;
@@ -30,16 +32,11 @@ const SecondCardColumnWrapper = styled.div<{ isAWin?: boolean }>`
   flex-direction: column;
 `
 
-const BunnyImageWrapper = styled.div`
-  display: flex;
-  margin-top: 32px;
-  justify-content: center;
-`
 
-const PastDrawsPage: React.FC = () => {
+const HowItWorksPage: React.FC = () => {
   return (
-    <PastLotteryRoundViewer />
+    <HowItWorks />
   )
 }
 
-export default PastDrawsPage
+export default HowItWorksPage

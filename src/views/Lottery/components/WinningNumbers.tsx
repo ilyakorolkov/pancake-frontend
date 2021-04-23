@@ -1,8 +1,8 @@
 import React from 'react'
 import styled from 'styled-components'
 import { useWeb3React } from '@web3-react/core'
-import { Image, Card, CardBody } from '@pancakeswap-libs/uikit'
-import { useWinningNumbers, useMatchingRewardLength } from 'hooks/useTickets'
+import { Card, CardBody, Image } from '@pancakeswap-libs/uikit'
+import { useMatchingRewardLength, useWinningNumbers } from 'hooks/useTickets'
 import useI18n from 'hooks/useI18n'
 import useGetLotteryHasDrawn from 'hooks/useGetLotteryHasDrawn'
 
@@ -27,81 +27,97 @@ const WinningNumbers: React.FC = () => {
             </Title>
             <br />
           </StyledCardHeader>
-          <Row>
+          {/* <Row>
             {winNumbers.map((number, index) => (
               // eslint-disable-next-line react/no-array-index-key
               <TicketNumberBox key={index}>
                 <CenteredText>{number}</CenteredText>
               </TicketNumberBox>
             ))}
+          </Row> */}
+          <Row>
+            <TicketNumberBox >
+               <CenteredText>{winNumbers[0]}</CenteredText>
+            </TicketNumberBox>
+            <TicketNumberBox2>
+              <CenteredText >{winNumbers[1]}</CenteredText>
+            </TicketNumberBox2>
+            <TicketNumberBox3 >
+              <CenteredText>{winNumbers[2]}</CenteredText>
+            </TicketNumberBox3>
+            <TicketNumberBox4 >
+              <CenteredText>{winNumbers[3]}</CenteredText>
+            </TicketNumberBox4>
           </Row>
-          <RabbitRow>
+           <RabbitRow>
             <RabbitBox>
-              <CardImageFirst>
-                <Image src="/images/sign bunny 1@2x.png" alt="Number 1" width={200} height={150} responsive />
-              </CardImageFirst>
-            </RabbitBox>
-            <RabbitBox>
-              <CardImage style={{ marginLeft: '-1.2em' }}>
-                <Image src="/images/sign bunny 2@2x.png" alt="Number 2" width={200} height={150} responsive />
+              <CardImage>
+                <Image src="/images/SOUP-bowl-0.svg" alt="Number 1" width={200} height={200} responsive />
               </CardImage>
             </RabbitBox>
             <RabbitBox>
-              <CardImage style={{ marginLeft: '-1.2em' }}>
-                <Image src="/images/sign bunny 3@2x.png" alt="Number 3" width={200} height={150} responsive />
+              <CardImage >
+                <Image src="/images/SOUP-bowl-1.svg" alt="Number 2" width={200} height={200} responsive />
               </CardImage>
             </RabbitBox>
             <RabbitBox>
-              <CardImage style={{ marginLeft: '-1.2em' }}>
-                <Image src="/images/sign bunny 4@2x.png" alt="Number 4" width={200} height={150} responsive />
+              <CardImage >
+                <Image src="/images/SOUP-bowl-2.svg" alt="Number 3" width={200} height={200} responsive />
+              </CardImage>
+            </RabbitBox>
+            <RabbitBox>
+              <CardImage >
+                <Image src="/images/SOUP-bowl-3.svg" alt="Number 4" width={200} height={200} responsive />
               </CardImage>
             </RabbitBox>
           </RabbitRow>
-          <RabbitRowSmall>
+          {/* <RabbitRowSmall>
             <RabbitBoxSmall>
               <CardImageFirst>
-                <Image src="/images/sign bunny 1@2x.png" alt="Number 1" width={200} height={150} responsive />
+                <Image src="/images/SOUP-bowl-0.svg" alt="Number 1" width={200} height={150} responsive />
               </CardImageFirst>
             </RabbitBoxSmall>
             <RabbitBoxSmall>
-              <CardImage style={{ marginLeft: '-1.2em' }}>
-                <Image src="/images/sign bunny 2@2x.png" alt="Number 2" width={200} height={150} responsive />
+              <CardImage >
+                <Image src="/images/SOUP-bowl-2.svg" alt="Number 2" width={200} height={150} responsive />
               </CardImage>
             </RabbitBoxSmall>
             <RabbitBoxSmall>
-              <CardImage style={{ marginLeft: '-1.2em' }}>
-                <Image src="/images/sign bunny 3@2x.png" alt="Number 3" width={200} height={150} responsive />
+              <CardImage >
+                <Image src="/images/SOUP-bowl-2.svg" alt="Number 3" width={200} height={150} responsive />
               </CardImage>
             </RabbitBoxSmall>
             <RabbitBoxSmall>
-              <CardImage style={{ marginLeft: '-1.2em' }}>
-                <Image src="/images/sign bunny 4@2x.png" alt="Number 4" width={200} height={150} responsive />
+              <CardImage>
+                <Image src="/images/SOUP-bowl-3.svg" alt="Number 4" width={200} height={150} responsive />
               </CardImage>
             </RabbitBoxSmall>
-          </RabbitRowSmall>
-          <Column>
-            <RowNoPadding>
-              <CenteredTextWithPadding>{TranslateString(442, 'Tickets matching 4 numbers:')}</CenteredTextWithPadding>
-              <CenteredTextWithPadding>
+          </RabbitRowSmall> */}
+
+          <CenteredTextWithPadding>{TranslateString(442,'Winner tickets')}</CenteredTextWithPadding>
+          <Row>
+            <RowWithBackground4>
+              <CenteredTextWithPaddingWhite>{TranslateString(442, 'Match 4:')}</CenteredTextWithPaddingWhite>
+              <CenteredTextWithPaddingWhite>
                 <strong>{MatchedNumber4}</strong>
-              </CenteredTextWithPadding>
-            </RowNoPadding>
-            <RowNoPadding>
-              <CenteredTextWithPadding>{TranslateString(444, 'Tickets matching 3 numbers:')}</CenteredTextWithPadding>
-              <CenteredTextWithPadding>
+              </CenteredTextWithPaddingWhite>
+            </RowWithBackground4>
+            <RowWithBackground3>
+              <CenteredTextWithPaddingWhite>{TranslateString(444, 'Match 3:')}</CenteredTextWithPaddingWhite>
+              <CenteredTextWithPaddingWhite>
                 <strong>{MatchedNumber3}</strong>
-              </CenteredTextWithPadding>
-            </RowNoPadding>
-            <RowNoPadding>
-              <CenteredTextWithPadding>{TranslateString(446, 'Tickets matching 2 numbers:')}</CenteredTextWithPadding>
-              <CenteredTextWithPadding>
+              </CenteredTextWithPaddingWhite>
+            </RowWithBackground3>
+            <RowWithBackground2>
+              <CenteredTextWithPaddingWhite>{TranslateString(446, 'Match 2:')}</CenteredTextWithPaddingWhite>
+              <CenteredTextWithPaddingWhite>
                 <strong>{MatchedNumber2}</strong>
-              </CenteredTextWithPadding>
-            </RowNoPadding>
-          </Column>
-          <Link href="https://api.pancakeswap.com/api/lottery?page=0&pageSize=25" target="_blank">
+              </CenteredTextWithPaddingWhite>
+            </RowWithBackground2>
+          </Row>
+          {/* <Link href="https://api.pancakeswap.com/api/lottery?page=0&pageSize=25" target="_blank">
             {TranslateString(448, 'Export recent winning numbers')}
-          </Link>
+          </Link> */}
         </StyledCardContentInner>
       </CardBody>
     </Card>
@@ -121,14 +137,12 @@ const Row = styled.div`
 `
 
 const RabbitRow = styled.div`
-  margin-top: -2.3em;
+  margin-top: -4.2em;
   align-items: center;
   display: flex;
   flex-direction: row;
 
-  @media (max-width: 768px) {
-    display: none;
-  }
+  
 `
 
 const RabbitRowSmall = styled.div`
@@ -146,25 +160,30 @@ const CardImage = styled.div`
   text-align: center;
 `
 
-const CardImageFirst = styled.div`
-  text-align: center;
-  margin-left: -1.2em;
-
-  @media (max-width: 600) {
-    margin-left: -0.2em;
-  }
-`
-
-const RowNoPadding = styled.div`
+const RowWithBackground = styled.div`
   align-items: center;
   display: flex;
   flex-direction: row;
+  border-radius: 4px;
+  background-color: #00000010;
+  margin-right: 16px
 `
 
+const RowWithBackground4 = styled(RowWithBackground)`
+  background-color: #e46c2c;
+`
+const RowWithBackground3 = styled(RowWithBackground)`
+  background-color: #6abf68;
+`
+const RowWithBackground2 = styled(RowWithBackground)`
+  background-color: #6abfb9;
+`
 const Column = styled.div`
   margin-top: 1em;
   align-items: center;
   display: flex;
+  padding-left: 2px;
+  padding-right: 2px;
   flex-direction: column;
 `
 
@@ -178,24 +197,32 @@ const CenteredTextWithPadding = styled.div`
   align-items: center;
   padding-left: 2px;
   padding-right: 2px;
+  margin: 4px;
+`
+const CenteredTextWithPaddingWhite = styled(CenteredTextWithPadding)`
+  color: white;
+`
+const TicketNumberBox = styled.div`
+  padding-top: 16px;
+  padding-bottom: 16px;
+  border-radius: 42px;
+  background-color: #00000010;
+  color: #EF4136;
+  font-size: 48px;
+  font-weight: 900;
+  margin-bottom: 10px;
+  width: 80px;
+  margin: 10px;
 `
 
-const TicketNumberBox = styled.div`
-  padding: 10px;
-  border-radius: 12px;
-  background: linear-gradient(180deg, #54dade 0%, #24c7d6 76.22%);
-  color: white;
-  font-size: 20px;
-  font-weight: 900;
-  margin: 10px;
-  margin-bottom: 7px;
-  width: 40px;
-
-  @media (min-width: 768px) {
-    font-size: 40px;
-    margin: 20px;
-    width: 60px;
-  }
+const TicketNumberBox2 = styled(TicketNumberBox)`
+  color: #e46c2c;  
+`
+const TicketNumberBox3 = styled(TicketNumberBox)`
+  color: #6abf68;
+`
+const TicketNumberBox4 = styled(TicketNumberBox)`
+  color: #6abfb9;  
 `
 
 const RabbitBox = styled.div`

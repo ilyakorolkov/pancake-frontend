@@ -1,6 +1,6 @@
 import React from 'react'
 import styled from 'styled-components'
-import { Card, CardBody, TicketRound, Text, Heading } from '@pancakeswap-libs/uikit'
+import { Card, CardBody, TicketRound, Text, Heading, Image } from '@pancakeswap-libs/uikit'
 import useI18n from 'hooks/useI18n'
 import useGetLotteryHasDrawn from 'hooks/useGetLotteryHasDrawn'
 import useTickets from 'hooks/useTickets'
@@ -36,10 +36,10 @@ const CardHeader = styled.div`
 
 const IconWrapper = styled.div`
   margin-right: 16px;
-  svg {
+ 
     width: 48px;
     height: 48px;
-  }
+  
 `
 
 const TicketCountWrapper = styled.div`
@@ -62,7 +62,7 @@ const TicketCard: React.FC<CardProps> = ({ isSecondCard = false }) => {
       <CardBody>
         <CardHeader>
           <IconWrapper>
-            <TicketRound />
+            <Image src="/images/SOUP-ticket.svg" alt="Number 1" width={100} height={100} responsive />
           </IconWrapper>
           {lotteryHasDrawn ? (
             <TicketCountWrapper>

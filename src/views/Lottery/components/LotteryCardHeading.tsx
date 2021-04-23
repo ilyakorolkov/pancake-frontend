@@ -1,19 +1,19 @@
 import React from 'react'
 import styled from 'styled-components'
-import { Flex, Heading, Text } from '@pancakeswap-libs/uikit'
+import { Flex, Heading, Image, Text } from '@pancakeswap-libs/uikit'
 
 interface HeadingProps {
   valueToDisplay?: string
   children?: string
-  Icon?: React.ComponentType
+  Icon?: string
 }
 
 const IconWrapper = styled.div`
   margin-right: 16px;
-  svg {
+  
     width: 48px;
     height: 48px;
-  }
+  
 `
 
 const LotteryCardHeading: React.FC<HeadingProps> = ({ valueToDisplay, children, Icon, ...props }) => {
@@ -21,7 +21,7 @@ const LotteryCardHeading: React.FC<HeadingProps> = ({ valueToDisplay, children, 
     <Flex {...props}>
       {Icon && (
         <IconWrapper>
-          <Icon />
+          <Image src={Icon} alt="Number 1" width={100} height={100} responsive />
         </IconWrapper>
       )}
       <Flex flexDirection="column">
@@ -36,7 +36,7 @@ const LotteryCardHeading: React.FC<HeadingProps> = ({ valueToDisplay, children, 
 
 LotteryCardHeading.defaultProps = {
   valueToDisplay: '',
-  Icon: () => <div />,
+  Icon: "/images/SOUP-new.svg" ,
   children: '',
 }
 

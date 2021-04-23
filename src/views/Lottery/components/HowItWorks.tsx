@@ -12,6 +12,7 @@ const LayoutWrapper = styled.div`
 
 const StyledHeading = styled(Heading)`
   margin: 16px 0;
+  color: ${(props) => props.theme.colors.secondary};
 `
 
 const StyledImage = styled(Image)`
@@ -23,22 +24,45 @@ const StyledLink = styled(Link)`
   margin-top: 16px;
 `
 
+const TextPar = styled(Text)`
+    white-space: pre-line;
+`
+
 const HowItWorks = () => {
   const TranslateString = useI18n()
 
   return (
     <LayoutWrapper>
-      <StyledImage src="/images/pancake-lottery-bunny.png" alt="lottery bunny" width={163} height={140} />
-      <StyledHeading size="lg" as="h3" color="secondary">
+      <StyledImage src="/images/soup-pot.gif" alt="lottery bunny" width={300} height={280} />
+      <StyledHeading size="lg" as="h3">
         {TranslateString(632, 'How it works')}
       </StyledHeading>
       <Text fontSize="16px">
         {TranslateString(
           426,
-          'Spend CAKE to buy tickets, contributing to the lottery pot. Win prizes if 2, 3, or 4 of your ticket numbers match the winning numbers and their exact order!',
+          'Spend SOUP to buy tickets, contributing to the lottery pot. Win prizes if 2, 3, or 4 of your ticket numbers match the winning numbers and their exact order! ',
         )}
       </Text>
-      <StyledLink href="https://docs.pancakeswap.finance/lottery-1">{TranslateString(610, 'Read more')}</StyledLink>
+
+      <StyledHeading size="lg" as="h3">
+        {TranslateString(632, 'How to win')}
+      </StyledHeading>
+      <Text fontSize="16px">
+        {TranslateString(
+          426,
+          'To win the lottery jackpot (50% of the entire lottery pool), users need to match all 4 numbers on their ticket in the exact same order as the 4 winning numbers.\n' +
+          'If you don’t match all 4, no need to worry. As long as you match 2 or more numbers in the correct order, you are guaranteed to win a prize. ',
+        )}
+      </Text>
+
+      <StyledHeading size="lg" as="h3">
+        {TranslateString(632, 'Pot allocation:')}
+      </StyledHeading>
+      <TextPar fontSize="16px">
+          {'• Match all 4 numbers in the exact order = win 50% of the pot (or split the pot if more than 1 winner). \n• Match 3 numbers in the exact order = win or split 20% of the pot. \n• Match 2 numbers in the exact order = win or split 10% of the pot. \n• At least 20% of the pot carried forward to next round. '}
+      </TextPar>
+
+      <StyledLink href="https://bscscan.com/address/">{TranslateString(610, 'Contract on BSCScan')}</StyledLink>
     </LayoutWrapper>
   )
 }

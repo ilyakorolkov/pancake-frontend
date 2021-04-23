@@ -1,6 +1,6 @@
 import React, { useState, useCallback } from 'react'
 import styled from 'styled-components'
-import { Heading, Card, CardBody, Button, useModal } from '@pancakeswap-libs/uikit'
+import { Heading, Card, CardBody, Button, useModal, Link } from '@pancakeswap-libs/uikit'
 import { useWeb3React } from '@web3-react/core'
 import { getCakeAddress } from 'utils/addressHelpers'
 import { getBalanceNumber } from 'utils/formatBalance'
@@ -40,10 +40,12 @@ const Label = styled.div`
 const Actions = styled.div`
   display: flex;
   margin-top: 24px;
+
   button {
     flex: 1 0 50%;
   }
 `
+
 
 const LotteryCard = () => {
   const { account } = useWeb3React()
@@ -73,29 +75,31 @@ const LotteryCard = () => {
   const renderLotteryTicketButtonBuyOrApprove = () => {
     if (!allowance.toNumber()) {
       return (
-        <Button width="100%" disabled={requestedApproval} onClick={handleApprove}>
-          {TranslateString(494, 'Approve CAKE')}
+        <Button width='100%' disabled={requestedApproval} onClick={handleApprove}>
+          {TranslateString(494, 'Approve SOUP')}
         </Button>
       )
     }
     return (
-      <Button id="dashboard-buy-tickets" variant="secondary" onClick={onPresentBuy} disabled={lotteryHasDrawn}>
-        {TranslateString(558, 'Buy Tickets')}
-      </Button>
+
+        <Button id='dashboard-buy-tickets' variant='secondary' onClick={onPresentBuy} disabled={lotteryHasDrawn}>
+          {TranslateString(558, 'Buy Tickets')}
+        </Button>
+
     )
   }
 
-  const [onPresentBuy] = useModal(<BuyModal max={cakeBalance} tokenName="CAKE" />)
+  const [onPresentBuy] = useModal(<BuyModal max={cakeBalance} tokenName='SOUP' />)
 
   return (
     <StyledLotteryCard>
       <CardBody>
-        <Heading size="xl" mb="24px">
+        <Heading size='xl' mb='24px'>
           {TranslateString(550, 'Your Lottery Winnings')}
         </Heading>
-        <CardImage src="/images/ticket.svg" alt="cake logo" width={64} height={64} />
+        <CardImage src='/images/SOUP-ticket.svg' width={64} height={64} />
         <Block>
-          <Label>{TranslateString(552, 'CAKE to Collect')}:</Label>
+          <Label>{TranslateString(552, 'SOUP to Collect')}:</Label>
           <CakeWinnings />
         </Block>
         <Block>
@@ -105,7 +109,7 @@ const LotteryCard = () => {
         {account ? (
           <Actions>
             <Button
-              id="dashboard-collect-winnings"
+              id='dashboard-collect-winnings'
               disabled={getBalanceNumber(claimAmount) === 0 || requestClaim}
               onClick={handleClaim}
               style={{ marginRight: '8px' }}
@@ -113,10 +117,11 @@ const LotteryCard = () => {
               {TranslateString(556, 'Collect Winnings')}
             </Button>
             {renderLotteryTicketButtonBuyOrApprove()}
+
           </Actions>
         ) : (
           <Actions>
-            <UnlockButton width="100%" />
+            <UnlockButton width='100%' />
           </Actions>
         )}
       </CardBody>

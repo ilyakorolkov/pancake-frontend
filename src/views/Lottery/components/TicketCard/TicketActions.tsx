@@ -1,6 +1,6 @@
 import React from 'react'
 import styled from 'styled-components'
-import { Button, useModal } from '@pancakeswap-libs/uikit'
+import { Button, Link, useModal } from '@pancakeswap-libs/uikit'
 import useI18n from 'hooks/useI18n'
 import useGetLotteryHasDrawn from 'hooks/useGetLotteryHasDrawn'
 import { useLotteryAllowance } from 'hooks/useAllowance'
@@ -20,6 +20,17 @@ const CardActions = styled.div`
   ${({ theme }) => theme.mediaQueries.lg} {
     justify-content: space-between;
   }
+`
+
+const StyledLink = styled(Link)`
+  align-self: center;
+  margin-top: 16px;
+  margin-left: 8px;
+`
+
+const Wrapper = styled.div`
+  display: block ;
+  
 `
 
 const TicketCard: React.FC = () => {
@@ -42,7 +53,7 @@ const TicketCard: React.FC = () => {
             {TranslateString(432, 'View your tickets')}
           </Button>
           <Button width="100%" disabled={requestedApproval} onClick={handleApprove}>
-            {TranslateString(494, 'Approve CAKE')}
+            {TranslateString(494, 'Approve SOUP')}
           </Button>
         </>
       )
@@ -61,11 +72,13 @@ const TicketCard: React.FC = () => {
         <Button id="lottery-buy-start" width="100%" onClick={onPresentBuy}>
           {TranslateString(430, 'Buy ticket')}
         </Button>
-      </>
+
+        </>
     )
   }
 
   return (
+    <Wrapper>
     <CardActions>
       {lotteryHasDrawn ? (
         <Button disabled> {TranslateString(874, 'On sale soon')}</Button>
@@ -73,6 +86,9 @@ const TicketCard: React.FC = () => {
         renderLotteryTicketButtons()
       )}
     </CardActions>
+    <StyledLink
+      href='https://exchange.pancakeswap.finance/#/swap?outputCurrency=0x94f559ae621f1c810f31a6a620ad7376776fe09e'>Get some SOUP on Pancakeswap</StyledLink>
+  </Wrapper>
   )
 }
 

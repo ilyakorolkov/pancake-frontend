@@ -1,11 +1,11 @@
 import { useCallback } from 'react'
 import { useWeb3React } from '@web3-react/core'
 import { useAppDispatch } from 'state'
-import { fetchFarmUserDataAsync, updateUserStakedBalance, updateUserBalance } from 'state/actions'
+import { /* fetchFarmUserDataAsync, */ updateUserStakedBalance, updateUserBalance } from 'state/actions'
 import { stake, sousStake, sousStakeBnb } from 'utils/callHelpers'
 import { useMasterchef, useSousChef } from './useContract'
 
-const useStake = (pid: number) => {
+/* const useStake = (pid: number) => {
   const dispatch = useAppDispatch()
   const { account } = useWeb3React()
   const masterChefContract = useMasterchef()
@@ -20,9 +20,9 @@ const useStake = (pid: number) => {
   )
 
   return { onStake: handleStake }
-}
+} */
 
-export const useSousStake = (sousId, isUsingBnb = false) => {
+/* export const useSousStake = (sousId, isUsingBnb = false) => {
   const dispatch = useAppDispatch()
   const { account } = useWeb3React()
   const masterChefContract = useMasterchef()
@@ -44,6 +44,5 @@ export const useSousStake = (sousId, isUsingBnb = false) => {
   )
 
   return { onStake: handleStake }
-}
+} */
 
-export default useStake
