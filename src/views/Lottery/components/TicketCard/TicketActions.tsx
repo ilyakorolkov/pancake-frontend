@@ -87,7 +87,7 @@ const TicketCard: React.FC = () => {
       )}
     </CardActions>
     <StyledLink
-      href='https://1inch.exchange/#/BNB/SOUP?network=56' target='__blank'>Buy SOUP</StyledLink>
+      href='https://app.1inch.io/#/56/swap/BNB/SOUP' target='__blank'>Buy SOUP</StyledLink>
   </Wrapper>
   )
 }
