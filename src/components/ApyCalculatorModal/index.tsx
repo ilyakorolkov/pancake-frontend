@@ -1,7 +1,7 @@
 import React from 'react'
 import BigNumber from 'bignumber.js'
 import styled from 'styled-components'
-import { Modal, Text, LinkExternal, Flex } from '@pancakeswap-libs/uikit'
+import { Modal, Text, LinkExternal, Flex } from 'soups-lottery-uikit'
 import useI18n from 'hooks/useI18n'
 import { cakeEarnedPerThousandDollarsCompounding, getRoi } from 'utils/compoundApyHelpers'
 

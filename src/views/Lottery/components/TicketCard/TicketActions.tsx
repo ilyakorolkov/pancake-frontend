@@ -1,12 +1,12 @@
 import React from 'react'
 import styled from 'styled-components'
-import { Button, Link, useModal } from '@pancakeswap-libs/uikit'
+import { Button, Link, useModal } from 'soups-lottery-uikit'
 import useI18n from 'hooks/useI18n'
 import useGetLotteryHasDrawn from 'hooks/useGetLotteryHasDrawn'
 import { useLotteryAllowance } from 'hooks/useAllowance'
 import useTickets from 'hooks/useTickets'
 import useTokenBalance from 'hooks/useTokenBalance'
-import { getCakeAddress } from 'utils/addressHelpers'
+import { getCakeAddress, getSoupAddress } from 'utils/addressHelpers'
 import { useApproval } from 'hooks/useApproval'
 import BuyTicketModal from './BuyTicketModal'
 import MyTicketsModal from './UserTicketsModal'
@@ -37,12 +37,12 @@ const TicketCard: React.FC = () => {
   const TranslateString = useI18n()
   const allowance = useLotteryAllowance()
   const lotteryHasDrawn = useGetLotteryHasDrawn()
-  const cakeBalance = useTokenBalance(getCakeAddress())
+  const soupBalance = useTokenBalance(getSoupAddress())
   const tickets = useTickets()
   const ticketsLength = tickets.length
   const [onPresentMyTickets] = useModal(<MyTicketsModal myTicketNumbers={tickets} from="buy" />)
   const [onPresentApprove] = useModal(<PurchaseWarningModal />)
-  const [onPresentBuy] = useModal(<BuyTicketModal max={cakeBalance} tokenName="CAKE" />)
+  const [onPresentBuy] = useModal(<BuyTicketModal max={soupBalance} tokenName="CAKE" />)
   const { handleApprove, requestedApproval } = useApproval(onPresentApprove)
 
   const renderLotteryTicketButtons = () => {
@@ -87,7 +87,7 @@ const TicketCard: React.FC = () => {
       )}
     </CardActions>
     <StyledLink
-      href='https://exchange.pancakeswap.finance/#/swap?outputCurrency=0x94f559ae621f1c810f31a6a620ad7376776fe09e'>Get some SOUP on Pancakeswap</StyledLink>
+      href='https://1inch.exchange/#/BNB/SOUP?network=56' target='__blank'>Buy SOUP</StyledLink>
   </Wrapper>
   )
 }

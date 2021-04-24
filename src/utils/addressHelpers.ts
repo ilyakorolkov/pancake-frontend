@@ -11,7 +11,9 @@ export const getAddress = (address: Address): string => {
 export const getAddressForChain = (address: Address, chainId: number): string => {
   return address[chainId]
 }
-
+export const getSoupAddress = () => {
+  return getAddress(tokens.soup.address)
+}
 export const getCakeAddress = () => {
   return getAddress(tokens.cake.address)
 }

@@ -15,7 +15,7 @@ import {
   useModal,
   Skeleton,
   Checkbox,
-} from '@pancakeswap-libs/uikit'
+} from 'soups-lottery-uikit'
 import { parseISO, formatDistance } from 'date-fns'
 import { useWeb3React } from '@web3-react/core'
 import { useToast } from 'state/hooks'

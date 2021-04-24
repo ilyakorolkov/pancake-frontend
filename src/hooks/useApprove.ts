@@ -5,7 +5,7 @@ import { ethers } from 'ethers'
 import { useAppDispatch } from 'state'
 import { updateUserAllowance } from 'state/actions'
 import { approve } from 'utils/callHelpers'
-import { useCake, useLottery, useSousChef } from './useContract'
+import { useCake, useLottery, useSoup, useSousChef } from './useContract'
 
 // Approve a Farm
 /* export const useApprove = (lpContract: Contract) => {
@@ -48,17 +48,17 @@ export const useSousApprove = (lpContract: Contract, sousId) => {
 // Approve the lottery
 export const useLotteryApprove = () => {
   const { account } = useWeb3React()
-  const cakeContract = useCake()
+  const soupContract = useSoup()
   const lotteryContract = useLottery()
 
   const handleApprove = useCallback(async () => {
     try {
-      const tx = await approve(cakeContract, lotteryContract, account)
+      const tx = await approve(soupContract, lotteryContract, account)
       return tx
     } catch (e) {
       return false
     }
-  }, [account, cakeContract, lotteryContract])
+  }, [account, soupContract, lotteryContract])
 
   return { onApprove: handleApprove }
 }

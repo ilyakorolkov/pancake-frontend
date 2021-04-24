@@ -1,7 +1,7 @@
 import React, { useContext, useState } from 'react'
 import styled from 'styled-components'
 import { useWeb3React } from '@web3-react/core'
-import { Card, CardBody, CardFooter, Flex, Heading, Image, Skeleton, Text } from '@pancakeswap-libs/uikit'
+import { Card, CardBody, CardFooter, Flex, Heading, Image, Skeleton, Text } from 'soups-lottery-uikit'
 import { getBalanceNumber } from 'utils/formatBalance'
 import useI18n from 'hooks/useI18n'
 import { useTotalRewards } from 'hooks/useTickets'

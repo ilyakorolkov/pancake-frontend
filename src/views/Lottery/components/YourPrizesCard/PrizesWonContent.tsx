@@ -1,6 +1,6 @@
 import React, { useCallback, useState } from 'react'
 import styled from 'styled-components'
-import { Button, Heading, Won, useModal } from '@pancakeswap-libs/uikit'
+import { Button, Heading, Won, useModal, Image } from 'soups-lottery-uikit'
 import useI18n from 'hooks/useI18n'
 import { getBalanceNumber } from 'utils/formatBalance'
 import { useMultiClaimLottery } from 'hooks/useBuyLottery'
@@ -15,11 +15,9 @@ const WinningsWrapper = styled.div`
 
 const IconWrapper = styled.div`
   margin-bottom: 16px;
-
-  svg {
-    width: 80px;
-    height: 80px;
-  }
+  width: 80px;
+  height: 80px;
+  
 `
 
 const StyledCardActions = styled.div`
@@ -69,7 +67,7 @@ const PrizesWonContent: React.FC<PrizesWonContentProps> = ({ onSuccess }) => {
   return (
     <StyledCardContentInner>
       <IconWrapper>
-        <Won />
+        <Image src="/images/won.webp" width={100} height={100} responsive/>
       </IconWrapper>
       <Heading as="h3" size="lg" color="secondary">
         {TranslateString(660, 'You won!')}

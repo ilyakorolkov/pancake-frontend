@@ -1,6 +1,6 @@
 import React from 'react'
 import styled from 'styled-components'
-import { Flex, Heading, Image, Text } from '@pancakeswap-libs/uikit'
+import { Flex, Heading, Image, Text } from 'soups-lottery-uikit'
 
 interface HeadingProps {
   valueToDisplay?: string

@@ -18,7 +18,7 @@ import {
   getPointCenterIfoAddress,
   getClaimRefundAddress,
   getTradingCompetitionAddress,
-  getEasterNftAddress, getRouterAddress,
+  getEasterNftAddress, getRouterAddress, getSoupAddress,
 } from 'utils/addressHelpers'
 
 // ABI
@@ -66,6 +66,9 @@ export const getSouschefContract = (id: number, web3?: Web3) => {
 }
 export const getPointCenterIfoContract = (web3?: Web3) => {
   return getContract(pointCenterIfo, getPointCenterIfoAddress(), web3)
+}
+export const getSoupContract = (web3?: Web3) => {
+  return getContract(cakeAbi, getSoupAddress(), web3)
 }
 export const getCakeContract = (web3?: Web3) => {
   return getContract(cakeAbi, getCakeAddress(), web3)

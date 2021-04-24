@@ -6,18 +6,17 @@ const tokens = {
   cake: {
     symbol: 'CAKE',
     address: {
-      56: '0x94f559ae621f1c810f31a6a620ad7376776fe09e',
-      97: '0xa35062141Fa33BCA92Ce69FeD37D0E8908868AAe',
-      1337: '0xBD453b2E20007Bb280F9634BE6128DB71E9AffeD'
+      56: '0x0e09fabb73bd3ade0a17ecc321fd13a19e81ce82',
+      97: '0xa35062141Fa33BCA92Ce69FeD37D0E8908868AAe'
     },
     decimals: 18,
-    projectLink: 'https://soups.finance/',
+    projectLink: 'https://pancakeswap.finance/',
   },
   soup: {
     symbol: 'SOUP',
     address: {
-      56: '0x94f559ae621f1c810f31a6a620ad7376776fe09e',
-      97: '0xa35062141Fa33BCA92Ce69FeD37D0E8908868AAe',
+      56: '0x94F559aE621F1c810F31a6a620Ad7376776fe09E',
+      97: '0x5887646832d7Bc1D963C89a03f59C52E76B6CeF8',
       1337: '0xBD453b2E20007Bb280F9634BE6128DB71E9AffeD'
     },
     decimals: 18,

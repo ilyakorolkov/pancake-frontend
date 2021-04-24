@@ -16,7 +16,7 @@ import {
   getSouschefContract,
   getClaimRefundContract,
   getTradingCompetitionContract,
-  getEasterNftContract,
+  getEasterNftContract, getSoupContract,
 } from 'utils/contractHelpers'
 
 /**
@@ -36,6 +36,10 @@ export const useIfoV2Contract = (address: string) => {
 export const useERC20 = (address: string) => {
   const web3 = useWeb3()
   return useMemo(() => getBep20Contract(address, web3), [address, web3])
+}
+export const useSoup = () => {
+  const web3 = useWeb3()
+  return useMemo(() => getSoupContract(web3), [web3])
 }
 
 export const useCake = () => {

@@ -1,6 +1,6 @@
 import React, { lazy, useEffect } from 'react'
 import { Route, Router, Switch } from 'react-router-dom'
-import { ResetCSS } from '@pancakeswap-libs/uikit'
+import { ResetCSS } from 'soups-lottery-uikit'
 import BigNumber from 'bignumber.js'
 import useEagerConnect from 'hooks/useEagerConnect'
 import { useFetchProfile } from 'state/hooks'

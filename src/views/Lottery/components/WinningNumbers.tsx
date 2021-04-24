@@ -1,7 +1,7 @@
 import React from 'react'
 import styled from 'styled-components'
 import { useWeb3React } from '@web3-react/core'
-import { Card, CardBody, Image } from '@pancakeswap-libs/uikit'
+import { Card, CardBody, Image } from 'soups-lottery-uikit'
 import { useMatchingRewardLength, useWinningNumbers } from 'hooks/useTickets'
 import useI18n from 'hooks/useI18n'
 import useGetLotteryHasDrawn from 'hooks/useGetLotteryHasDrawn'
@@ -210,9 +210,9 @@ const TicketNumberBox = styled.div`
   color: #EF4136;
   font-size: 48px;
   font-weight: 900;
-  margin-bottom: 10px;
-  width: 80px;
   margin: 10px;
+  margin-bottom: 20px;
+  width: 80px;
 `
 
 const TicketNumberBox2 = styled(TicketNumberBox)`
