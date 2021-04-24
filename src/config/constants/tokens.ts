@@ -440,7 +440,7 @@ const tokens = {
     symbol: 'wBNB',
     address: {
       56: '0xbb4cdb9cbd36b01bd1cbaebf2de08d9173bc095c',
-      97: '0xae13d989dac2f0debff460ac112a837c89baa7cd',
+     // 97: '0xae13d989dac2f0debff460ac112a837c89baa7cd',
     },
     decimals: 18,
     projectLink: 'https://pancakeswap.finance/',
@@ -611,7 +611,7 @@ const tokens = {
     symbol: 'BUSD',
     address: {
       56: '0xe9e7cea3dedca5984780bafc599bd69add087d56',
-      97: '',
+    //  97: '',
     },
     decimals: 18,
     projectLink: 'https://www.paxos.com/busd/',

@@ -17,7 +17,7 @@ export default {
 
   pancakeRouter: {
     56: '0x05fF2B0DB69458A0750badebc4f9e13aDd608C7F',
-    97: '0xD99D1c33F9fC3444f8101754aBC46c52416550D1'
+  //  97: '0xD99D1c33F9fC3444f8101754aBC46c52416550D1'
   },
 
   masterChef: {
